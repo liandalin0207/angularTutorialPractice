@@ -3,11 +3,20 @@
         <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                    <button 
+                        type="submit" 
+                        class="btn btn-success"
+                        [disabled]="!recipeForm.valid"
+                    >Save</button>
+                    <button 
+                        type="button" 
+                        class="btn btn-danger" 
+                        style="margin-left: 10px;"
+                        (click)="onCancel()"
+                    >Cancel</button>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="margin-top: 10px;">
                 <div class="col-12">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -29,13 +38,14 @@
                             id="imagePath"
                             formControlName="imagePath"
                             class="form-control"
+                            #imagePath
                         >
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <img src="" alt="" class="img-responsive">
+                    <img [src]="imagePath.value" class="img-responsive" style="max-height: 330px;">
                 </div>
             </div>
             <div class="row">
@@ -73,7 +83,11 @@
                             class="form-control">
                         </div>
                         <div class="col-2">
-                            <button class="btn btn-danger">X</button>
+                            <button 
+                            class="btn btn-danger"
+                            type="button"
+                            (click)="onRemoveIngredient(i)"
+                            >X</button>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px;">
