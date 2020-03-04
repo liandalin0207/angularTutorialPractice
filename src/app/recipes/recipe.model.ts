@@ -1,5 +1,7 @@
+import { RecipeInterface } from './../shared/recipe.interface';
 import { Ingredient } from './../shared/ingredient.model';
-export class Recipe {
+
+export class Recipe implements RecipeInterface {
     public name: string;
     public description: string;
     public imagePath: string;

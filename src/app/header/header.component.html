@@ -12,13 +12,13 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/shopping-list">Shopping List</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="authService.isAuthenticated()">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">
           Dropdown
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" style="cursor: pointer;">Save Data</a>
-          <a class="dropdown-item" style="cursor: pointer;">Fetch Data</a>
+          <a class="dropdown-item" style="cursor: pointer;" (click)="onSaveDate()">Save Data</a>
+          <a class="dropdown-item" style="cursor: pointer;" (click)="onFetchDate()">Fetch Data</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" style="cursor: pointer;">Something else here</a>
         </div>
@@ -26,6 +26,21 @@
       <li class="nav-item">
         <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+      <ng-template [ngIf]="!authService.isAuthenticated()">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/signup">Register</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/signin">Login</a>
+        </li>
+      </ng-template>
+      <ng-template [ngIf]="authService.isAuthenticated()">
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+        </li>
+      </ng-template>
     </ul>
     <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
