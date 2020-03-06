@@ -1,48 +1,57 @@
 import { AuthService } from './../auth/auth.service';
 import { Recipe } from './../recipes/recipe.model';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
 import { RecipeService } from '../recipes/recipe.service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataStorageService {
     constructor(
-            private http: HttpClient,
+            private httpClient: HttpClient,
             private recipeService: RecipeService,
             private authService: AuthService) {}
 
     storeRecipes() {
-        this.authService.getToken()
-            .then(
-                (token: string) => {
-                    this.http.put(
-                        'https://angulartest-10543.firebaseio.com/recipes.json?auth=' + token,
-                        this.recipeService.getRecipes())
-                        .subscribe(response => {
-                            console.log('store recipes response');
-                            console.log(response);
-                        });
-                })
-            .catch(
-                (error) => console.log(error)
-            );
+        // this.authService.getToken()
+        //     .then(
+        //         (token: string) => {
+                    // this.httpClient.put(
+                    //     'https://angulartest-10543.firebaseio.com/recipes.json',
+                    //     this.recipeService.getRecipes(), {
+                    //         params: new HttpParams().set('auth', token)
+                    //     })
+                    //         .subscribe(response => {
+                    //             console.log('store recipes response');
+                    //             console.log(response);
+                    //         });
+            //     })
+            // .catch(
+            //     (error) => console.log(error)
+            // );
+
+            // const httpParams = new HttpParams().set('auth', this.authService.getToken());
+            const req = new HttpRequest('PUT', 'https://angulartest-10543.firebaseio.com/recipes.json',
+            // this.recipeService.getRecipes(), {reportProgress: true, params: httpParams});
+            this.recipeService.getRecipes(), {reportProgress: true});
+            this.httpClient.request(req).subscribe(response => {
+                    console.log('store recipes response');
+                    console.log(response);
+            });
     }
 
     async getRecipes() {
-        this.authService.getToken()
-            .then(
-                (token: string) => {
-                    this.http.get<Recipe[]>('https://angulartest-10543.firebaseio.com/recipes.json?auth=' + token)
+        // this.httpClient.get<Recipe[]>('https://angulartest-10543.firebaseio.com/recipes.json?auth=' + this.authService.getToken())
+        this.httpClient.get<Recipe[]>('https://angulartest-10543.firebaseio.com/recipes.json')
                     .map(
-                        response => {
-                            for (let recipe of response) {
+                        recipes => {
+                            for (let recipe of recipes) {
                                 if (!recipe['ingredients']) {
                                     console.log(recipe);
                                     recipe['ingredients'] = [];
                                 }
                             }
-                            return response;
+                            return recipes;
                         }
                     )
                     .subscribe(
@@ -54,7 +63,5 @@ export class DataStorageService {
                             this.recipeService.setRecipes(recipes);
                         }
                     );
-                }
-            );
     }
 }
