@@ -12,7 +12,7 @@ import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './store/app.reducers';
+import { reducers, metaReducers } from './store/app.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
 
@@ -28,7 +28,9 @@ import { AuthEffects } from './auth/store/auth.effects';
     ShoppingListModule,
     AuthModule,
     CoreModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(
+      reducers,
+      {metaReducers}),
     EffectsModule.forRoot([AuthEffects]),
     StoreRouterConnectingModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : []

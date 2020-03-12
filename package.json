@@ -26,6 +26,7 @@
     "bootstrap": "^4.4.1",
     "firebase": "^7.9.3",
     "jquery": "^3.4.1",
+    "ngrx-store-localstorage": "^8.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "^6.5.4",
     "rxjs-compat": "^6.5.4",
