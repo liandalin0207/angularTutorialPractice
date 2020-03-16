@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
         return this.store.select('auth')
             .take(1)
             .switchMap(
-                (authState: fromAuth.State) => {
+                (authState: fromAuth.AuthState) => {
                     const copiedReq = req.clone({params: req.params.append('auth', authState.token)});
                     return next.handle(copiedReq);
                 }

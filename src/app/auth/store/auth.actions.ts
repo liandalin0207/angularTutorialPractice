@@ -1,45 +1,52 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 
-export const TRY_SIGNUP = 'TRY_SIGNUP';
-export const SIGNUP = 'SIGNUP';
-export const TRY_SIGNIN = 'TRY_SIGNIN';
-export const SIGNIN = 'SIGNIN';
-export const LOGOUT = 'LOGOUT';
-export const SET_TOKEN = 'SET_TOKEN';
+// export const TRY_SIGNUP = 'TRY_SIGNUP';
+// export const SIGNUP = 'SIGNUP';
+// export const TRY_SIGNIN = 'TRY_SIGNIN';
+// export const SIGNIN = 'SIGNIN';
+// export const LOGOUT = 'LOGOUT';
+// export const SET_TOKEN = 'SET_TOKEN';
 
-export class TrySignup implements Action {
-    readonly type = TRY_SIGNUP;
+// export class TrySignup implements Action {
+//     readonly type = TRY_SIGNUP;
 
-    constructor(public payloads: {username: string, password: string}) {}
-}
+//     constructor(public payloads: {username: string, password: string}) {}
+// }
 
-export class TrySignin implements Action {
-    readonly type = TRY_SIGNIN;
+// export class TrySignin implements Action {
+//     readonly type = TRY_SIGNIN;
 
-    constructor(public payloads: {username: string, password: string}) {}
-}
+//     constructor(public payloads: {username: string, password: string}) {}
+// }
 
-export class Signup implements Action {
-    readonly type = SIGNUP;
-}
+// export class Signup implements Action {
+//     readonly type = SIGNUP;
+// }
 
-export class Signin implements Action {
-    readonly type = SIGNIN;
-}
+// export class Signin implements Action {
+//     readonly type = SIGNIN;
+// }
 
-export class Logout implements Action {
-    readonly type = LOGOUT;
-}
+// export class Logout implements Action {
+//     readonly type = LOGOUT;
+// }
 
-export class SetToken implements Action {
-    readonly type = SET_TOKEN;
+// export class SetToken implements Action {
+//     readonly type = SET_TOKEN;
 
-    constructor(public payload: string) {}
-}
+//     constructor(public payload: string) {}
+// }
 
-export type AuthActions = Signup
-    | Signin
-    | Logout
-    | SetToken
-    | TrySignup
-    | TrySignin;
+// export type AuthActions = Signup
+//     | Signin
+//     | Logout
+//     | SetToken
+//     | TrySignup
+//     | TrySignin;
+
+export const trySignup = createAction('TRY_SIGNUP', props<{username: string, password: string}>());
+export const trySignin = createAction('TRY_SIGNIN', props<{username: string, password: string}>());
+export const signup = createAction('SIGNUP');
+export const signin = createAction('SIGNIN');
+export const logout = createAction('LOGOUT');
+export const setToken = createAction('SET_TOKEN', props<{payload: string}>());

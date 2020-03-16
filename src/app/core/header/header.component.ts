@@ -12,7 +12,7 @@ import * as RecipeActions from '../../recipes/store/recipe.actions';
 })
 export class HeaderComponent implements OnInit{
 
-    authState: Observable<fromAuth.State>;
+    authState: Observable<fromAuth.AuthState>;
 
     constructor(
         private store: Store<fromRecipe.FeatureState>) {}
@@ -30,6 +30,6 @@ export class HeaderComponent implements OnInit{
     }
 
     onLogout() {
-        this.store.dispatch(new AuthActions.Logout());
+        this.store.dispatch(AuthActions.logout());
     }
 }

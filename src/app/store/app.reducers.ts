@@ -6,7 +6,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 
 export interface AppState {
     shoppingList: fromShoppingList.State;
-    auth: fromAuth.State;
+    auth: fromAuth.AuthState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -17,5 +17,5 @@ export const reducers: ActionReducerMap<AppState> = {
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
     return localStorageSync({ keys: ['auth'], rehydrate: true})(reducer);
   }
-  
+
 export const metaReducers: MetaReducer<AppState>[] = [localStorageSyncReducer];
