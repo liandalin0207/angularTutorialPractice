@@ -12,7 +12,7 @@ import * as fromRecipe from '../store/recipe.reducers';
 })
 export class RecipeListComponent implements OnInit {
   
-  recipeState: Observable<fromRecipe.State>;
+  recipeState: Observable<fromRecipe.RecipeState>;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,

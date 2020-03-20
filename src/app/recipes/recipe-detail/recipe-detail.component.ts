@@ -14,7 +14,7 @@ import * as RecipeActions from '../store/recipe.actions';
 })
 export class RecipeDetailComponent implements OnInit {
 
-  recipeState: Observable<fromRecipe.State>;
+  recipeState: Observable<fromRecipe.RecipeState>;
   id: number;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -34,7 +34,7 @@ export class RecipeDetailComponent implements OnInit {
   sendToShoppingList() {
     this.store.select('recipes')
       .take(1)
-      .subscribe((recipeState: fromRecipe.State) => {
+      .subscribe((recipeState: fromRecipe.RecipeState) => {
         this.store.dispatch(new ShoppingListActions.AddIngredients(recipeState.recipes[this.id].ingredients));
         this.router.navigate(['shopping-list']);
         }
@@ -47,7 +47,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onDeleteRecipe() {
-    this.store.dispatch(new RecipeActions.DeleteRecipes(this.id));
+    this.store.dispatch(RecipeActions.deleteRecipes({payload: this.id}));
     this.router.navigate(['/recipes']);
   }
 }

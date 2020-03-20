@@ -22,11 +22,11 @@ export class HeaderComponent implements OnInit{
     }
 
     onSaveDate() {
-        this.store.dispatch(new RecipeActions.StoreRecipes());
+        this.store.dispatch(RecipeActions.storeRecipes());
     }
 
     onFetchDate() {
-        this.store.dispatch(new RecipeActions.FetchRecipes());
+        this.store.dispatch(RecipeActions.fetchRecipes());
     }
 
     onLogout() {

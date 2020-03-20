@@ -40,13 +40,13 @@ export class RecipeEditComponent implements OnInit {
     //   this.recipeForm.value('ingredients')
     // );
     if (this.editMode) {
-      this.store.dispatch(new RecipeActions.UpdateRecipes({
+      this.store.dispatch(RecipeActions.updateRecipes({
         index: this.id,
         updatedRecipe: this.recipeForm.value
       }));
       this.router.navigate(['../'], {relativeTo: this.activatedRoute});
     } else {
-      this.store.dispatch(new RecipeActions.AddRecipes(this.recipeForm.value));
+      this.store.dispatch(RecipeActions.addRecipes({payload: this.recipeForm.value}));
       this.router.navigate(['/recipes']);
     }
   }
@@ -64,7 +64,7 @@ export class RecipeEditComponent implements OnInit {
     if (this.editMode) {
       this.store.select('recipes')
         .take(1)
-        .subscribe((recipeState: fromRecipe.State) => {
+        .subscribe((recipeState: fromRecipe.RecipeState) => {
           const recipe = recipeState.recipes[this.id];
           if (recipe) {
             recipeName = recipe.name;
